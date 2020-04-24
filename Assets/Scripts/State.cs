@@ -8,6 +8,7 @@ public class StateParam
     public GameObject unit;
     public NavMeshAgent agent;
     public Animator anim;
+    public Transform destination;
     public float range;
     public Transform target;
 
@@ -32,6 +33,7 @@ public class State
     public State(StateParam param)
     {
         _stateParam = param;
+        stage = EVENT.ENTER;
         // Debug.Log(_stateParam);
         // Debug.Log(_stateParam.agent);
         // Debug.Log(_stateParam.anim);

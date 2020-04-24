@@ -9,6 +9,7 @@ public class AI_RifleMan : MonoBehaviour
     NavMeshAgent agent;
     Animator anim;
     Transform target;
+    Transform dest;
     [SerializeField] float range;
     StateParam _stateParam; 
     State currentState;
@@ -20,10 +21,20 @@ public class AI_RifleMan : MonoBehaviour
 
     void Start()
     {
+        Base[] bases = FindObjectsOfType<Base>();
+        foreach(Base _base in bases)
+        {
+            if(_base.tag == "RED_BASE" && team == TEAM.TEAM_BLUE) 
+                { dest = _base.transform; break; }
+            else if(_base.tag == "BLUE_BASE" && team == TEAM.TEAM_RED) 
+                { dest = _base.transform; break; }
+        }
+
         _stateParam = new StateParam();
         _stateParam.unit = gameObject;
         _stateParam.agent = this.GetComponent<NavMeshAgent>();
         _stateParam.anim = this.GetComponent<Animator>();
+        _stateParam.destination = dest;
         _stateParam.range = range;
         _stateParam.target = null;
 
@@ -44,7 +55,11 @@ public class AI_RifleMan : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        if(team == TEAM.TEAM_RED)
+            Gizmos.color = Color.red;
+        else if(team == TEAM.TEAM_BLUE)
+            Gizmos.color = Color.blue;
+            
         Gizmos.DrawWireSphere(transform.position, range);
     }
 }

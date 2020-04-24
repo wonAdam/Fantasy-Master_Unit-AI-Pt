@@ -11,6 +11,7 @@ public class State_Advance : State
 
     public override void Enter()
     {
+        _stateParam.agent.destination = _stateParam.destination.position;
         base.Enter();
     }
 
@@ -64,6 +65,7 @@ public class State_Advance : State
 
     public override void Exit()
     {
+        //_stateParam.agent.destination = _stateParam.unit.transform.position;
         base.Exit();
     }
 }

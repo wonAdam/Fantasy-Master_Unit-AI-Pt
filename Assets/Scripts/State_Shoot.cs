@@ -11,6 +11,7 @@ public class State_Shoot : State
 
     public override void Enter()
     {
+        _stateParam.anim.SetBool("isShooting", true);
         base.Enter();
     }
 
@@ -20,7 +21,9 @@ public class State_Shoot : State
         if(Vector3.Distance(_stateParam.target.position, _stateParam.unit.transform.position) 
             <= _stateParam.range)
         {
-            _stateParam.anim.SetBool("isShooting", true);
+            _stateParam.unit.transform.LookAt(_stateParam.target);
+            _stateParam.agent.destination = _stateParam.unit.transform.position;
+            
 
             //some damage system implementation
             //... or in animation event
