@@ -4950,9 +4950,9 @@ GameObject:
   - component: {fileID: 203933144983134751}
   - component: {fileID: 203933144983134739}
   - component: {fileID: 203933144983134738}
-  - component: {fileID: 203933144983134741}
-  - component: {fileID: 1159453329714118388}
   - component: {fileID: 9219178178411643095}
+  - component: {fileID: 8754088343756865347}
+  - component: {fileID: 8798045833046104822}
   m_Layer: 8
   m_Name: Rifle Man
   m_TagString: Untagged
@@ -5069,36 +5069,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &203933144983134741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 203933144983134748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32f310a76e4684f40a61d4116d599823, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 10
-  team: 0
-  fireVFX: {fileID: 203933144457492859}
-  damage: 10
---- !u!114 &1159453329714118388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 203933144983134748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd779bbd6246d884aa03c0eda7c3b133, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
-  isAlive: 1
 --- !u!195 &9219178178411643095
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5121,3 +5091,39 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8754088343756865347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203933144983134748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b33784a304bf59e46961569327d96658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visionDistance: 15
+  shootDistance: 10
+--- !u!114 &8798045833046104822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203933144983134748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17e43e7170fb45b4b81dcd16d0ff55d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scripts:
+  - {fileID: 4900000, guid: 872523cefb1fdbb4d85bee2a2264d709, type: 3}
+  autoReset: 1
+  tickOn: 0
+  sourceInfos:
+  - isFoldout: 1
+    breakPoints: 
+    breakPointStatuses: 
+    collapsedLines: 
+    btScript: 

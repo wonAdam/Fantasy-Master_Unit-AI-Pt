@@ -1,0 +1,20 @@
+tree("Root")
+	parallel
+		repeat mute tree("Alive")
+		repeat mute tree("Dead")
+
+tree("Alive")
+	fallback
+		while IsInRange	
+			tree("InRange")	
+		Advance
+
+
+tree("InRange")
+	fallback
+		Shoot
+		Pursue
+
+tree("Dead")
+	while isDead
+		Die
