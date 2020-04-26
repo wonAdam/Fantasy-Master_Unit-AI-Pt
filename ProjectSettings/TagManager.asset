@@ -4,8 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - RED_BASE
-  - BLUE_BASE
+  - Base
   layers:
   - Default
   - TransparentFX

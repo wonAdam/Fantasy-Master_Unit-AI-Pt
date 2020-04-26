@@ -12,6 +12,11 @@ tree("Alive")
 
 tree("InRange")
 	fallback
+		Not
+			Random 1 2 3
+				Wait 0.5
+				Wait 1.0
+				Wait 1.5
 		Shoot
 		Pursue
 
