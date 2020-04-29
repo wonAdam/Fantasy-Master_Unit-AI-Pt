@@ -25,6 +25,10 @@ public class RM_AI : MonoBehaviour
 
     private void Awake() 
     {
+    }
+
+    private void Start() 
+    {
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         GameObject[] bases = GameObject.FindGameObjectsWithTag("Base");
@@ -32,10 +36,6 @@ public class RM_AI : MonoBehaviour
         {
             if(b.GetComponent<Team>().tEAM != GetComponent<Team>().tEAM) enemyBase = b.transform;
         }
-    }
-
-    private void Start() 
-    {
     }
 
     [Task]
@@ -69,7 +69,9 @@ public class RM_AI : MonoBehaviour
         List<Collider> shootColList = new List<Collider>();
         foreach (Collider col in shootCollider)
         {
-            if (col != GetComponent<Collider>()) shootColList.Add(col);
+            if (col != GetComponent<Collider>() && 
+                col.GetComponent<Team>().tEAM != GetComponent<Team>().tEAM) 
+                shootColList.Add(col);
         }
 
         if (shootColList.Count > 0)
@@ -84,10 +86,13 @@ public class RM_AI : MonoBehaviour
                                                 Quaternion.LookRotation(direction, transform.up),
                                                 Time.deltaTime * rotationSpeed);
 
-
-            // shoot animation trigger
-            ResetAllAnimTrigger();
-            anim.SetTrigger("isShooting");
+            if(target != null)
+            {
+                transform.LookAt(target.transform);
+                // shoot animation trigger
+                ResetAllAnimTrigger();
+                anim.SetTrigger("isShooting");
+            }
 
 
             Task.current.Succeed();
@@ -97,7 +102,6 @@ public class RM_AI : MonoBehaviour
             Task.current.Fail();
         }    
     }
-
     [Task]
     void Pursue()
     {
@@ -108,21 +112,23 @@ public class RM_AI : MonoBehaviour
         List<Collider> visColList = new List<Collider>();
         foreach (Collider col in visCollider)
         {
-            if (col != GetComponent<Collider>()) visColList.Add(col);
+            if (col != GetComponent<Collider>() && 
+                col.GetComponent<Team>().tEAM != GetComponent<Team>().tEAM)
+                visColList.Add(col);
         }
 
         if (visColList.Count > 0)
         {
             target = visColList[0].gameObject;
 
-            // Vector3 direction = target.transform.position - transform.position;
-
-            // transform.rotation = Quaternion.Slerp(transform.rotation, 
-            //                                     Quaternion.LookRotation(direction, transform.up),
-            //                                     Time.deltaTime * rotationSpeed);
-
             // pursue animation trigger
-            agent.SetDestination(target.transform.position);
+            if(target != null)
+            {
+                
+                agent.SetDestination(target.transform.position);
+                ResetAllAnimTrigger();
+                anim.SetTrigger("isAdvance");
+            }
 
             Task.current.Succeed();
         }
@@ -131,7 +137,6 @@ public class RM_AI : MonoBehaviour
             Task.current.Fail();
         }    
     }
-
     [Task]
     public void Advance()
     {
@@ -149,7 +154,6 @@ public class RM_AI : MonoBehaviour
 
         Task.current.Succeed();
     }
-
     [Task]
     public void Die()
     {
@@ -158,24 +162,21 @@ public class RM_AI : MonoBehaviour
         Destroy(gameObject);
         
     }
-
     private void ResetAllAnimTrigger()
     {
         anim.ResetTrigger("isShooting");
         anim.ResetTrigger("isDead");
         anim.ResetTrigger("isAdvance");
     }
-
     private void FireVFX()
     {
         fireVFX.Play();
     }
-    
     public void SendDamage()
     {
-        target?.GetComponent<Health>().DealDamage(damage);
+        if(target != null)
+            target.GetComponent<Health>().DealDamage(damage);
     }
-
     private void OnDrawGizmos() 
     {
         Gizmos.color = Color.gray;
