@@ -22,6 +22,7 @@ public class RM_AI : MonoBehaviour
     private Animator anim;
     private NavMeshAgent agent;
     private bool isDead = false;
+    private bool initShoot = true;
 
     private void Awake() 
     {
@@ -53,8 +54,46 @@ public class RM_AI : MonoBehaviour
                         visColList.Add(col);
         }
 
-        if (visColList.Count > 0) return true;
-        else return false;  
+        if (visColList.Count > 0) 
+        {
+            target = visColList[0].gameObject;
+            return true;
+        }
+        else 
+        {
+            if(!initShoot)
+                initShoot = true;
+            target = null; 
+            return false; 
+        } 
+    }
+    [Task]
+    public bool isInitShoot()
+    {
+        return initShoot;
+    }
+
+    [Task]
+    public bool CanShoot()
+    {
+        if(target == null) 
+        {
+            if(!initShoot)
+                initShoot = true;
+            return false;
+        }
+
+        else
+        {
+            if(initShoot)
+                initShoot = false;
+
+            if( Mathf.Abs(transform.position.x - target.transform.position.x) <= shootDistance)
+            {
+                return true;
+            }
+            else return false;
+        }
     }
 
     [Task]
