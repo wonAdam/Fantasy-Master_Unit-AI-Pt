@@ -67,6 +67,7 @@ public class RM_AI : MonoBehaviour
             return false; 
         } 
     }
+    
     [Task]
     public bool isInitShoot()
     {

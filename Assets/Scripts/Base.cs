@@ -4,13 +4,5 @@ using UnityEngine;
 
 public class Base : MonoBehaviour
 {
-    [SerializeField] GameObject unitToSpawn;
-    [SerializeField] Event eventTimerUp;
-
-    public void SpawnUnit()
-    {
-        GameObject unit = Instantiate(unitToSpawn, transform.position, Quaternion.identity);
-        unit.GetComponent<Team>().tEAM = GetComponent<Team>().tEAM;
-        unit.GetComponent<Team>().SetTeamColor();
-    }
+    
 }
